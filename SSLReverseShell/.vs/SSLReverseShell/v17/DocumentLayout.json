@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Github-Vixx\\SSLReveseShell\\SSLReverseShell\\",
+  "WorkspaceRootPath": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\Extras Advanced\\SSLReverseShell\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CFBCCCB3-F5D8-47E5-AA84-40AD41CB8408}|SSLReverseShell\\SSLReverseShell.vcxproj|C:\\Github-Vixx\\SSLReveseShell\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{CFBCCCB3-F5D8-47E5-AA84-40AD41CB8408}|SSLReverseShell\\SSLReverseShell.vcxproj|C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\Extras Advanced\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{CFBCCCB3-F5D8-47E5-AA84-40AD41CB8408}|SSLReverseShell\\SSLReverseShell.vcxproj|solutionrelative:SSLReverseShell\\SSLReverseShell.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
@@ -24,9 +24,9 @@
               "DocumentIndex": 1,
               "Title": "apiset.h",
               "DocumentMoniker": "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\shared\\apiset.h",
-              "RelativeDocumentMoniker": "..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\shared\\apiset.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\shared\\apiset.h",
               "ToolTip": "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\shared\\apiset.h",
-              "RelativeToolTip": "..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\shared\\apiset.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\shared\\apiset.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-09-26T10:51:44.243Z"
@@ -35,11 +35,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "SSLReverseShell.cpp",
-              "DocumentMoniker": "C:\\Github-Vixx\\SSLReveseShell\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp",
+              "DocumentMoniker": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\Extras Advanced\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp",
               "RelativeDocumentMoniker": "SSLReverseShell\\SSLReverseShell.cpp",
-              "ToolTip": "C:\\Github-Vixx\\SSLReveseShell\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp",
+              "ToolTip": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\Extras Advanced\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp",
               "RelativeToolTip": "SSLReverseShell\\SSLReverseShell.cpp",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAkwIIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-09-26T08:45:51.878Z",
               "EditorCaption": ""

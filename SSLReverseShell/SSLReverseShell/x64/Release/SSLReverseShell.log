@@ -1,8 +1,8 @@
 ﻿  SSLReverseShell.cpp
-C:\Users\Vixx\Desktop\Tools\Extras Advanced\SSLReverseShell\SSLReverseShell\SSLReverseShell.cpp(74,21): warning C4244: 'argument': conversion from 'SOCKET' to 'int', possible loss of data
-C:\Users\Vixx\Desktop\Tools\Extras Advanced\SSLReverseShell\SSLReverseShell\SSLReverseShell.cpp(102,50): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Vixx\Desktop\Tools\PEN-300\Extras Advanced\SSLReverseShell\SSLReverseShell\SSLReverseShell.cpp(88,21): warning C4244: 'argument': conversion from 'SOCKET' to 'int', possible loss of data
+C:\Users\Vixx\Desktop\Tools\PEN-300\Extras Advanced\SSLReverseShell\SSLReverseShell\SSLReverseShell.cpp(116,50): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Generating code
   Previous IPDB not found, fall back to full compilation.
-  All 7 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 225 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
-  SSLReverseShell.vcxproj -> C:\Users\Vixx\Desktop\Tools\Extras Advanced\SSLReverseShell\x64\Release\SSLReverseShell.exe
+  SSLReverseShell.vcxproj -> C:\Users\Vixx\Desktop\Tools\PEN-300\Extras Advanced\SSLReverseShell\x64\Release\SSLReverseShell.exe
