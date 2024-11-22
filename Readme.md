@@ -2,8 +2,8 @@
 
 ## Overview
 When it comes to SSL/TLS reverse shells, the publicly available options are often limited to:
-- **Using `msfvenom` to generate an HTTPS reverse shell**.
-- **Using a PowerShell payload**.
+- **Using `msfvenom` to generate an HTTPS reverse shell (Signatured)**.
+- **Using a PowerShell / Python payload (high level languages)**.
 
 ### Why Do We Need One?
 Using a standard reverse shell often results in unencrypted traffic, which can be easily flagged by **Network Detection and Response (NDR)** systems or firewalls. These tools inspect network traffic and can identify remote code execution patterns, blocking the binary and alerting defenders.
@@ -12,7 +12,7 @@ An encrypted reverse shell helps evade such detection by:
 1. Encrypting all communication, making it harder for network tools to inspect the traffic.
 2. Using SSL to blend in with legitimate HTTPS traffic.
 
-To address this gap, I created a simple POC **C++ SSL Reverse Shell** (commented and explained):
+To address this gap, I created a simple **C++ SSL Reverse Shell** POC (commented and explained):
 - **Undetectable** by Microsoft Defender and some other AV solutions at the time of publishing.
 - Enables secure communication via SSL, reducing the chance of detection.
 
