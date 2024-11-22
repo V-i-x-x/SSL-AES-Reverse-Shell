@@ -54,21 +54,21 @@ Follow these steps to set up the project:
 1- Go to C/C++ → Code Generation → Runtime Library.
 Set this to Multi-threaded (/MT) to ensure that your application links statically against the runtime libraries, which helps in creating a single binary.
 
-![Local Image](images\MT.png "MT FLAG")
+![Local Image](./images/MT.png "MT FLAG")
 
 2- Configuration Properties > C/C++ > General, add the path to the OpenSSL include directory (C:\OpenSSLWin64\install\include) to Additional Include Directories.
 
-![Local Image](images\Include.png "Include Libraries")
+![Local Image](./images/Include.png "Include Libraries")
 
 3- Under Configuration Properties > Linker > General, add the path to the OpenSSL library directory (C:\OpenSSLWin64\install\lib) to Additional Library Directories
 
-![Local Image](images\Linker1.png "Linker.png")
+![Local Image](./images/Linker1.png "Linker.png")
 
 4- Under Configuration Properties > Linker > Input, add the following to Additional Dependencies:
 C:\OpenSSLWin64\install\lib\libssl.lib
 C:\OpenSSLWin64\install\lib\libcrypto.lib
 
-![Local Image](images\Linker2.png "Linker.png")
+![Local Image](./images/Linker2.png "Linker.png")
 
 ---
 
