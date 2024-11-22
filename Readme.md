@@ -26,7 +26,7 @@ Follow these steps to set up the project:
 1. **Download the Necessary Files**:
    - Clone the repository:  
      ```bash
-     git clone https://github.com/<your-repo-name>/SSLReverseShell.git
+     git clone https://github.com/V-i-x-x/SSLReverseShell.git
      ```
    - Download `OpenSSLWin64.zip` (linked in the repository).
 
