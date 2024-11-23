@@ -13,7 +13,7 @@ An encrypted reverse shell helps evade such detection by:
 2. Using SSL to blend in with legitimate HTTPS traffic.
 
 To address this gap, I created a simple **C++ SSL Reverse Shell** POC (commented and explained):
-- **Undetectable** by Microsoft Defender and some other AV solutions at the time of publishing.
+- **Undetected** by Microsoft Defender and some other AV solutions at the time of publishing.
 - Enables secure communication via SSL, reducing the chance of detection.
 
 > **Note**: I tested the binary against a limited set of antivirus solutions, and results may vary across environments.
