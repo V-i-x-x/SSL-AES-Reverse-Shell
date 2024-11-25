@@ -19,9 +19,11 @@ def decrypt_aes_cbc(encrypted_hex):
         encrypted_data = binascii.unhexlify(encrypted_hex)  # Convert hex to bytes
         cipher = AES.new(aes_key, AES.MODE_CBC, aes_iv)  # Create AES cipher
         decrypted_data = cipher.decrypt(encrypted_data)  # Decrypt
-        return decrypted_data.rstrip(b'\x00').decode('utf-8')  # Remove padding and decode to string
+        #print(f"Decrypted data (hex): {binascii.hexlify(decrypted_data)}")  # Print raw decrypted data
+        return decrypted_data.rstrip(b'\x00').decode('utf-8', errors='ignore')  # Remove padding and decode to string
     except Exception as e:
         return f"Decryption error: {e}"
+
 
 def pad(data):
     """Add PKCS7 padding to data to align with AES block size."""
