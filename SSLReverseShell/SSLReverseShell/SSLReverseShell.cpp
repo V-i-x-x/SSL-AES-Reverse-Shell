@@ -156,6 +156,12 @@ int main(int argc, char* argv[]) {
                     // Log and send the response.
                     std::cout << "Encrypted data: " << encryptedResponse << std::endl;
                     SSL_write(ssl, httpResponse.str().c_str(), httpResponse.str().length());
+
+                    // Output buffer for decryption => for debugging purposes
+                    std::string decryptedResponse = decryptCommand(encryptedResponse, aes);
+                    // Print the decrypted data
+                    std::cout << "Decrypted data: " << std::endl;
+                    std::cout << decryptedResponse << std::endl;
                 }
                 else {
                     printf("[-] No valid command found in headers\n");

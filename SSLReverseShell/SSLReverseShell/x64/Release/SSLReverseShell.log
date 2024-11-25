@@ -1,11 +1,1 @@
-﻿  AES_CBC.cpp
-C:\Users\Vixx\Desktop\Tools\PEN-300\CSA Containers\SSLReverseShell\SSLReverseShell\AES_CBC.cpp(71,85): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Vixx\Desktop\Tools\PEN-300\CSA Containers\SSLReverseShell\SSLReverseShell\AES_CBC.cpp(82,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  SSLReverseShell.cpp
-C:\Users\Vixx\Desktop\Tools\PEN-300\CSA Containers\SSLReverseShell\SSLReverseShell\SSLReverseShell.cpp(97,21): warning C4244: 'argument': conversion from 'SOCKET' to 'int', possible loss of data
-C:\Users\Vixx\Desktop\Tools\PEN-300\CSA Containers\SSLReverseShell\SSLReverseShell\SSLReverseShell.cpp(158,89): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 556 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  SSLReverseShell.vcxproj -> C:\Users\Vixx\Desktop\Tools\PEN-300\CSA Containers\SSLReverseShell\x64\Release\SSLReverseShell.exe
+﻿
