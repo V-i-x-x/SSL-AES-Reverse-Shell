@@ -15,9 +15,23 @@ An encrypted reverse shell helps evade such detection by:
 To address this gap, I created a simple **C++ SSL Reverse Shell** POC (commented and explained):
 - **Undetected** by Microsoft Defender and some other AV solutions at the time of publishing.
 - Enables secure communication via SSL, reducing the chance of detection.
-- Using AES Encryption / Decryption and embedding the results and commands within HTTP headers to bypass deep packet inspection
+- Using AES Encryption / Decryption and embedding the results and commands within HTTP headers to bypass deep packet inspection.
 
 > **Note**: I tested the binary against a limited set of antivirus solutions, and results may vary across environments.
+
+---
+
+## Purpose of the POC
+
+This Proof of Concept (POC) demonstrates how to build a reverse shell that utilizes **SSL/TLS encryption** and **AES encryption/decryption** to achieve secure communication between the attacker and the target. The main objectives and functionality of this POC are as follows:
+
+- **Avoid Detection**: By using SSL/TLS (the same protocol used for legitimate HTTPS traffic), the reverse shell traffic blends in with regular encrypted web traffic, making it much harder to detect by Network Detection and Response (NDR) systems or firewalls.
+- **Encrypted Communication**: The communication between the client (target) and the attacker is encrypted using **AES** (Advanced Encryption Standard). This ensures that even if the traffic is intercepted, it cannot be easily read or tampered with without the correct decryption key.
+- **Command Execution in Encrypted Form**: Commands are **encrypted** on the server side and sent to the client over the SSL connection. The client decrypts these commands, executes them, and then sends back the encrypted output to the attacker.
+- **Embedding Commands in HTTP Headers**: The encrypted command is embedded within a custom HTTP header (`X-Command`), allowing it to pass through web proxies, firewalls, or any other inspection system that may be scanning traffic for unusual activity. This technique makes the reverse shell more difficult to detect by conventional network traffic analysis tools.
+- **Simulating Legitimate HTTPS Traffic**: By using HTTPS (SSL/TLS) and embedding encrypted payloads within HTTP headers, the reverse shell traffic appears as regular secure web traffic, which helps evade deep packet inspection (DPI) systems that are typically used to identify malicious traffic patterns.
+
+The goal of this POC is to illustrate a method of bypassing common network security mechanisms by employing common, but underused, techniques to maintain the confidentiality and integrity of the communication channel. It is important to note that while the reverse shell is **undetected** by some AV solutions, it is **not guaranteed** to bypass all defenses and can be detected by more sophisticated network monitoring and intrusion detection systems (IDS).
 
 ---
 
@@ -52,7 +66,7 @@ Follow these steps to set up the project:
 
 ## Configuration In Visual Studio
 
-1- Go to C/C++ → Code Generation → Runtime Library.
+1- Go to C/C++ → Code Generation → Runtime Library.  
 Set this to Multi-threaded (/MT) to ensure that your application links statically against the runtime libraries, which helps in creating a single binary.
 
 ![Local Image](./images/MT.png "MT FLAG")
@@ -65,8 +79,8 @@ Set this to Multi-threaded (/MT) to ensure that your application links staticall
 
 ![Local Image](./images/Linker1.png "Linker.png")
 
-4- Under Configuration Properties > Linker > Input, add the following to Additional Dependencies:
-C:\OpenSSLWin64\install\lib\libssl.lib
+4- Under Configuration Properties > Linker > Input, add the following to Additional Dependencies:  
+C:\OpenSSLWin64\install\lib\libssl.lib  
 C:\OpenSSLWin64\install\lib\libcrypto.lib
 
 ![Local Image](./images/Linker2.png "Linker.png")
