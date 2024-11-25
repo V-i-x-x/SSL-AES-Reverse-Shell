@@ -1,4 +1,4 @@
-# SSL C++ Reverse Shell
+# SSL/TLS C++ Reverse Shell (HTTPS)
 
 ## Overview
 When it comes to SSL/TLS reverse shells, the publicly available options are often limited to:
