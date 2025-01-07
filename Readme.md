@@ -1,5 +1,5 @@
 # Encrypted SSL/TLS C++ Reverse Shell (HTTPS)
-<span style="color:green">Status: Undetected (Tested on couple AV solutions including defenders)</span>
+<span style="color:green;">Status: Undetected (Tested on couple AV solutions including defenders)</span>
 
 ## Overview
 When it comes to SSL/TLS reverse shells, the publicly available options are often limited to:
